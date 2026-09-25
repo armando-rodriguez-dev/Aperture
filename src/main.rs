@@ -2,12 +2,13 @@ use std::env;
 use std::fs; 
 
 
-const VALID_COMMANDS: [&str; 5] = [
+const VALID_COMMANDS: [&str; 6] = [
     "init",
     "status",
     "add",
     "commit",
-    "log"
+    "log",
+    "help"
 ];
 
 ///Checks whether the command is one of the valid commads.
@@ -20,7 +21,7 @@ const VALID_COMMANDS: [&str; 5] = [
 /// ### Returns
 /// 
 /// 'true' if the command is valid, otherwise 'false'.
-fn is_valid_command(valid_command_array: [&str; 5], 
+fn is_valid_command(valid_command_array: [&str; 6], 
                     command: &str
     ) -> bool {
 
