@@ -44,6 +44,15 @@ fn main() -> std::io::Result<()> {
     //Store all current directory items
     let items_in_current_directory = fs::read_dir("./").unwrap();
 
+    
+    //Check if the current args was valid
+    //The command for Aperture will be in the arr[1] index
+    if !is_valid_command(VALID_COMMANDS, &args[1]) {
+        println!("Invalid Command");
+    }
+
+
+
 
     Ok(())
 }
