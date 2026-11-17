@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 
 TARGET = aperture
-SOURCE = src/main.cpp
+SOURCES = $(wildcard src/*.cpp)
 
 INSTALL_DIR = $(HOME)/.local/bin
 
@@ -11,7 +11,7 @@ INSTALL_DIR = $(HOME)/.local/bin
 all: build
 
 build:
-	$(CXX) $(CXXFLAGS) $(SOURCE) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(TARGET)
 
 install: build
 	mkdir -p $(INSTALL_DIR)

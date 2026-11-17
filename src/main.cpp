@@ -3,6 +3,8 @@
 #include <array>
 #include <cstdio>
 
+#include "InitCommand.h"
+
 bool isValidCommand(
     const std::string &,
     const std::array<std::string, 8> &
@@ -21,6 +23,7 @@ const std::array<std::string, 8> COMMANDS = {
 
 
 int main(int argc, char *argv[]) {
+    
     //Not Enough Arguments
     if(argc <= 1) {
         printf("error: no commands provided\n");
