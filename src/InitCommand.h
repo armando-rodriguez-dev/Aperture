@@ -3,10 +3,9 @@
 
 #include <string>
 
-
 bool doesGitDirectoryExist();
 
-bool isCurrentGitDirectoryValid(std::string &currentWorkingDirectory);
+bool isCurrentGitDirectoryValid();
 
 void createGitDirectory(std::string &currentWorkingDirectory);
 
