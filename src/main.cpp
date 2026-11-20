@@ -3,6 +3,8 @@
 #include <array>
 #include <cstdio>
 
+#include <filesystem>
+
 #include "InitCommand.h"
 
 bool isValidCommand(
@@ -40,6 +42,8 @@ int main(int argc, char *argv[]) {
 
         return 1;
     }
+
+    std::string currentWorkingDirectory = std::filesystem::current_path();
 
     return 0;
 }
