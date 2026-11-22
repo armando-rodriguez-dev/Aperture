@@ -22,30 +22,58 @@ bool doesApertureFolderExist() {
     return doesFolderExistInCurrentDirectory(currentWorkingDirectory, ".aperture");
 }
 
-// bool isCurrentApertureFolderValid(const std::string &currentPath) {
+bool isCurrentApertureFolderValid(const std::string &currentPath) {
+    const bool missingRequiredRootFiles =
+        !doesFileExistInCurrentDirectory(currentPath, "COMMIT_EDITMSG") ||
+        !doesFileExistInCurrentDirectory(currentPath, "HEAD") ||
+        !doesFileExistInCurrentDirectory(currentPath, "index");
 
-//     const bool missingRequiredFiles = 
-//         !doesFileExistInCurrentDirectory(currentPath, "COMMIT_EDITMSG") ||
-//         !doesFileExistInCurrentDirectory(currentPath, "HEAD") || 
-//         !doesFileExistInCurrentDirectory(currentPath, "index");
+    if (missingRequiredRootFiles) {
+        return false;
+    }
 
-//     if(missingRequiredFiles){
-//         return false;
-//     }
+    const bool missingRequiredRootFolders =
+        !doesFolderExistInCurrentDirectory(currentPath, "logs") ||
+        !doesFolderExistInCurrentDirectory(currentPath, "objects") ||
+        !doesFolderExistInCurrentDirectory(currentPath, "refs");
 
+    if (missingRequiredRootFolders) {
+        return false;
+    }
 
-// }
+    // Check for required subfolders and files in folders
+    const std::string refsFolderPath = currentPath + "/refs";
+    const std::string logsFolderPath = currentPath + "/logs";
 
-/**
-    ├── COMMIT_EDITMSG       (file)
-    ├── HEAD                 (file)
-    ├── index                (binary file)
-    ├── logs/
-    │   └── HEAD             (text file)
-    ├── objects/
-        └── stores the objects the were compressed
-    └── refs/
-        └── heads/
-            └── stores the hashes of the heads of each of the 
+    const bool missingHeadsSubfolder =
+        !doesFolderExistInCurrentDirectory(refsFolderPath, "heads");
+
+    const bool missingHEADFile =
+        !doesFileExistInCurrentDirectory(refsFolderPath, "HEAD");
+
+    if (missingHEADFile || missingHeadsSubfolder) {
+        return false;
+    }
+
+    return true;
+}
+
+void createApertureDirectory(std::string &currentWorkingDirectory) {
+   /** all in the .aperture folder
+            ├── COMMIT_EDITMSG       (file)
+            ├── HEAD                 (file)
+            ├── index                (binary file)
+            ├── logs/                (folder)
+            │   └── HEAD             (text file) in a subfolder
+            ├── objects/             (folder)
+                └── stores the objects the were compressed
+            └── refs/                (folder)
+                └── heads/           (subfolder, still a folder)
+                    └── stores the hashes of the heads of each of the 
 */
+
+}
+
+
+
 
