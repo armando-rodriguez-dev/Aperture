@@ -23,7 +23,6 @@ const std::array<std::string, 8> COMMANDS = {
     "help"
 };
 
-const std::string currentApertureDirectory = (std::filesystem::current_path()).string() + "./aperture";
 
 int main(int argc, char *argv[]) {
     
@@ -44,18 +43,10 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if(argv[1] == "init") {
-        //check if there exists .aperture
-        //if .aperture exists, check its validity
-        //if .aperture does not exist, create it
-    }
-
-    isCurrentApertureFolderValid(currentApertureDirectory);
-
     return 0;
 }
 
-bool isValidCommand(const std::string &input, const std::array<std::string, 8> &commands) {
+bool isValidCommand(const std::string &input, const std::array<std::string, 8> &commands) { 
     for(std::size_t i = 0; i < commands.size(); i++) {
         if(input == commands[i]) {
             return true;

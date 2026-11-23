@@ -1,17 +1,18 @@
 #ifndef INIT_COMMAND_H
 #define INIT_COMMAND_H
 
-#include <string>
+#include <filesystem>
+
 
 bool doesApertureFolderExist();
 
-bool doesFileExistInCurrentDirectory(const std::string &currentPath, const std::string &fileName);
+bool doesFileExistInCurrentDirectory(const std::filesystem::path &currentPath, const std::filesystem::path &fileName);
 
-bool doesFolderExistInCurrentDirectory(const std::string &currentPath, const std::string &folderName);
+bool doesFolderExistInCurrentDirectory(const std::filesystem::path &currentPath, const std::filesystem::path &folderName);
 
-bool isCurrentApertureFolderValid(const std::string &currentPath);
+bool isCurrentApertureFolderValid(const std::filesystem::path &currentPath);
 
-void createApertureDirectory(std::string &currentWorkingDirectory);
+void createApertureDirectory(const std::filesystem::path &currentWorkingDirectory);
 
 /**
     ├── COMMIT_EDITMSG       (file)
