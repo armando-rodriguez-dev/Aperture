@@ -3,7 +3,6 @@
 
 #include <filesystem>
 
-
 bool doesApertureFolderExist();
 
 bool doesFileExistInCurrentDirectory(const std::filesystem::path &currentPath, const std::filesystem::path &fileName);

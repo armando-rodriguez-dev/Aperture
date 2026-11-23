@@ -2,15 +2,12 @@
 #include <string>
 #include <array>
 #include <cstdio>
-
 #include <filesystem>
 
 #include "InitCommand.h"
 
-bool isValidCommand(
-    const std::string &,
-    const std::array<std::string, 8> &
-);
+bool isValidCommand(const std::string &input, const std::array<std::string, 8> &command);
+std::filesystem::path returnProjectRootFolderPath();
 
 const std::array<std::string, 8> COMMANDS = {
     "init",
@@ -25,7 +22,6 @@ const std::array<std::string, 8> COMMANDS = {
 
 
 int main(int argc, char *argv[]) {
-    
     //Not Enough Arguments
     if(argc <= 1) {
         printf("error: no commands provided\n");
@@ -55,3 +51,20 @@ bool isValidCommand(const std::string &input, const std::array<std::string, 8> &
 
     return false;
 }
+
+// Searches the current directory and its parents for an Aperture project.
+std::filesystem::path returnProjectRootFolderPath() {
+    std::filesystem::path currentPath = std::filesystem::current_path();
+    const std::filesystem::path rootPath = currentPath.std::filesystem::path::root_path();
+
+    while(!doesFolderExistInCurrentDirectory(currentPath, ".aperture")) {
+        currentPath = currentPath.std::filesystem::path::parent_path();
+
+        if(currentPath == rootPath) {
+            return {};
+        }
+    }   
+
+    return currentPath;
+}
+

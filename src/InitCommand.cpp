@@ -60,4 +60,3 @@ bool isCurrentApertureFolderValid(const std::filesystem::path &currentPath) {
 
 
 
-
