@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include <cstdio>
 #include <filesystem>
 
 #include "InitCommand.h"
@@ -24,19 +23,49 @@ const std::array<std::string, 8> COMMANDS = {
 int main(int argc, char *argv[]) {
     //Not Enough Arguments
     if(argc <= 1) {
-        printf("error: no commands provided\n");
-        printf("Usage: aperture <command> [arguments]\n");
-        printf("Run 'aperture help' for more information\n");
+        std::cerr
+            << "error: no commands provided\n"
+            << "Usage: aperture <command> [arguments]\n"
+            << "Run 'aperture help' for more information\n";
 
         return 1;
     }
 
-    //Invalid Command
-    if(!isValidCommand(argv[1], COMMANDS)) {
-        printf("error: '%s' is not a valid aperture command\n", argv[1]);
-        printf("Run 'aperture help' to see available commands\n");
+    std::string command = argv[1];
 
-        return 1;
+    //Invalid Command
+    if(!isValidCommand(command, COMMANDS)) {
+        std::cerr
+            << "error: '"
+            << argv[1]
+            << "' is not a valid aperture command\n"
+            << "Run 'aperture help' to see available commands\n";
+        
+          return 1;
+    }
+
+    if(command == "init") {
+        if(argc > 2) {
+            std::cerr << "usage: aperture init \n";
+            return 1;
+        }
+
+        std::filesystem::path currentPath = returnProjectRootFolderPath();
+
+        //check whether there exists a ".aperture" folder, if none exist create a new one
+        if(!doesApertureFolderExist()) {
+            createApertureDirectory(currentPath);
+            std::cout << "Initialized empty Aperture repository in " << currentPath << "\n";
+            return 0;
+        }
+
+        //check whether the folder is valid, if not valid then reinitialize the folder
+        if(!isCurrentApertureFolderValid(currentPath)) {
+            reinitializeApertureDirectory(currentPath);
+        } 
+
+        std::cout << "Reinitialized existing Aperture repository in " << currentPath << "\n";
+        return 0;
     }
 
     return 0;

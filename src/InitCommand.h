@@ -13,6 +13,8 @@ bool isCurrentApertureFolderValid(const std::filesystem::path &currentPath);
 
 void createApertureDirectory(const std::filesystem::path &currentWorkingDirectory);
 
+void reinitializeApertureDirectory(const std::filesystem::path &currentWorkingDirectory);
+
 /**
     ├── COMMIT_EDITMSG       (file)
     ├── HEAD                 (file)
