@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 
 TARGET = aperture
-SOURCES = $(wildcard src/*.cpp)
+SOURCES = $(wildcard src/*.cpp src/*/*.cpp)
 
 INSTALL_DIR = $(HOME)/.local/bin
 
@@ -22,3 +22,4 @@ uninstall:
 
 clean:
 	rm -f $(TARGET)
+

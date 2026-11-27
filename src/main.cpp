@@ -3,7 +3,7 @@
 #include <array>
 #include <filesystem>
 
-#include "InitCommand.h"
+#include "commands/InitCommand.h"
 
 bool isValidCommand(const std::string &input, const std::array<std::string, 8> &command);
 std::filesystem::path returnProjectRootFolderPath();
@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        std::filesystem::path currentPath = returnProjectRootFolderPath();
+        std::filesystem::path currentPath = std::filesystem::current_path();
 
         //check whether there exists a ".aperture" folder, if none exist create a new one
         if(!doesApertureFolderExist()) {

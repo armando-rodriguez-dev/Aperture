@@ -127,6 +127,3 @@ void reinitializeApertureDirectory(const std::filesystem::path &currentWorkingDi
         std::ofstream{headFileInLogsFolder};
     }
 }   
-
-
-
